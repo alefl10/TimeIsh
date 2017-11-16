@@ -13,8 +13,10 @@ class ClockScene: SKScene {
     
     private var clockNode: ClockNode!
     private var handNode: HandNode!
+    private var timeZoneNode: TimeZoneNode!
     private var clock: SKSpriteNode!
     private var hand: SKSpriteNode!
+    private var timeZone: SKShapeNode!
     
     var Dot = SKSpriteNode()
     
@@ -63,11 +65,18 @@ class ClockScene: SKScene {
         
         clockNode = ClockNode(scene: scene!)
         clock = clockNode.clock
+        
         handNode = HandNode(scene: scene!, clockNode: clockNode.clock)
         hand = handNode.hand
         
+        timeZoneNode = TimeZoneNode(scene: scene!, clockNode: clockNode.clock, proportion: 15.0)
+        timeZone = timeZoneNode.timeZone
+        
+        
         self.addChild(clock)
+        self.addChild(timeZone)
         self.addChild(hand)
+        
         AddDot()
         
         

@@ -19,9 +19,10 @@
 		A9037EF81FBAC09D00D75F46 /* TimeIshUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9037EF71FBAC09D00D75F46 /* TimeIshUITests.swift */; };
 		A93730EC1FBACB0C0048F2C0 /* ClockScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93730EB1FBACB0C0048F2C0 /* ClockScene.swift */; };
 		A93730EE1FBACB720048F2C0 /* ClockScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A93730ED1FBACB720048F2C0 /* ClockScene.sks */; };
-		A9CF61871FBB77A8003526CE /* GCFloatExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CF61861FBB77A8003526CE /* GCFloatExtension.swift */; };
 		A9CF618A1FBBE69D003526CE /* ClockNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CF61891FBBE69D003526CE /* ClockNode.swift */; };
 		A9CF618C1FBBF6C9003526CE /* HandNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CF618B1FBBF6C9003526CE /* HandNode.swift */; };
+		A9CF618E1FBCF2F6003526CE /* TimeZoneNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CF618D1FBCF2F6003526CE /* TimeZoneNode.swift */; };
+		A9CF61911FBCF7F0003526CE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CF61901FBCF7F0003526CE /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,9 +61,10 @@
 		A9037EF91FBAC09D00D75F46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A93730EB1FBACB0C0048F2C0 /* ClockScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockScene.swift; sourceTree = "<group>"; };
 		A93730ED1FBACB720048F2C0 /* ClockScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ClockScene.sks; sourceTree = "<group>"; };
-		A9CF61861FBB77A8003526CE /* GCFloatExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCFloatExtension.swift; sourceTree = "<group>"; };
 		A9CF61891FBBE69D003526CE /* ClockNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockNode.swift; sourceTree = "<group>"; };
 		A9CF618B1FBBF6C9003526CE /* HandNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandNode.swift; sourceTree = "<group>"; };
+		A9CF618D1FBCF2F6003526CE /* TimeZoneNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeZoneNode.swift; sourceTree = "<group>"; };
+		A9CF61901FBCF7F0003526CE /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				A9CF61881FBBE676003526CE /* GameNodes */,
+				A9CF618F1FBCF7D6003526CE /* Extensions */,
 				A9037ED11FBAC09C00D75F46 /* AppDelegate.swift */,
 				A9037ED91FBAC09C00D75F46 /* GameViewController.swift */,
 				A9037ED51FBAC09C00D75F46 /* Actions.sks */,
@@ -121,7 +124,6 @@
 				A9037ED31FBAC09C00D75F46 /* GameScene.sks */,
 				A93730EB1FBACB0C0048F2C0 /* ClockScene.swift */,
 				A93730ED1FBACB720048F2C0 /* ClockScene.sks */,
-				A9CF61861FBB77A8003526CE /* GCFloatExtension.swift */,
 				A9037EDB1FBAC09C00D75F46 /* Main.storyboard */,
 				A9037EDE1FBAC09C00D75F46 /* Assets.xcassets */,
 				A9037EE01FBAC09C00D75F46 /* LaunchScreen.storyboard */,
@@ -153,8 +155,17 @@
 			children = (
 				A9CF61891FBBE69D003526CE /* ClockNode.swift */,
 				A9CF618B1FBBF6C9003526CE /* HandNode.swift */,
+				A9CF618D1FBCF2F6003526CE /* TimeZoneNode.swift */,
 			);
 			path = GameNodes;
+			sourceTree = "<group>";
+		};
+		A9CF618F1FBCF7D6003526CE /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A9CF61901FBCF7F0003526CE /* Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -295,11 +306,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				A9CF618A1FBBE69D003526CE /* ClockNode.swift in Sources */,
+				A9CF61911FBCF7F0003526CE /* Extensions.swift in Sources */,
 				A9037ED81FBAC09C00D75F46 /* GameScene.swift in Sources */,
 				A9CF618C1FBBF6C9003526CE /* HandNode.swift in Sources */,
-				A9CF61871FBB77A8003526CE /* GCFloatExtension.swift in Sources */,
 				A93730EC1FBACB0C0048F2C0 /* ClockScene.swift in Sources */,
 				A9037EDA1FBAC09C00D75F46 /* GameViewController.swift in Sources */,
+				A9CF618E1FBCF2F6003526CE /* TimeZoneNode.swift in Sources */,
 				A9037ED21FBAC09C00D75F46 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

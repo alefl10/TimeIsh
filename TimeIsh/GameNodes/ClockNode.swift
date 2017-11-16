@@ -16,6 +16,7 @@ class ClockNode {
     
     private final let CLOCK_WIDTH = CGFloat(412.0)
     private final let CLOCK_HEIGHT = CGFloat(412.0)
+    private final let Z_POSITION = CGFloat(0)
     
     init(scene: SKScene) {
         _clockScene = scene
@@ -30,6 +31,7 @@ class ClockNode {
         _clockNode = SKSpriteNode(imageNamed: "Circle")
         _clockNode.size = CGSize(width: CLOCK_WIDTH, height: CLOCK_HEIGHT)
         _clockNode.position = CGPoint(x: _clockScene.frame.midX, y: _clockScene.frame.midY)
+        _clockNode.zPosition = Z_POSITION
     }
     
 }
