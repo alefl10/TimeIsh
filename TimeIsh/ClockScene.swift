@@ -14,14 +14,18 @@ class ClockScene: SKScene {
     private var clockNode: ClockNode!
     private var handNode: HandNode!
     private var timeZoneNode: TimeZoneNode!
+    private var dotNode: DotNode!
     private var clock: SKSpriteNode!
     private var hand: SKSpriteNode!
     private var timeZone: SKShapeNode!
+    private var dot: SKShapeNode!
     
     private var gameStarted = Bool()
     private var movingClockwise = Bool()
     
     private var Path = UIBezierPath()
+    
+    private final let PROPORTION = CGFloat(15.0)
 
 //    MARK: FUTURE VARIABLES
     
@@ -54,13 +58,17 @@ class ClockScene: SKScene {
         handNode = HandNode(scene: scene!, clockNode: clockNode.clock)
         hand = handNode.hand
         
-        timeZoneNode = TimeZoneNode(scene: scene!, clockNode: clockNode.clock, proportion: 15.0)
+        timeZoneNode = TimeZoneNode(scene: scene!, clockNode: clockNode.clock, proportion: PROPORTION)
         timeZone = timeZoneNode.timeZone
+        
+        dotNode = DotNode(scene: scene!, clockNode: clockNode.clock)
+        dot = dotNode.dot
         
         
         self.addChild(clock)
         self.addChild(timeZone)
         self.addChild(hand)
+        self.addChild(dot)
     }
     
     
