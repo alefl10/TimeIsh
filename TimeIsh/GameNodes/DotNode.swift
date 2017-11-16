@@ -17,7 +17,7 @@ class DotNode {
     private var _dotNode: SKShapeNode!
     private var _clockNode: SKSpriteNode!
     
-    private final let DOT_RADIUS = CGFloat(25.0)
+    private final let DOT_RADIUS = CGFloat(30)
     
     private final let Z_POSITION = CGFloat(3)
     

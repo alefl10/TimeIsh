@@ -105,7 +105,7 @@ class ClockScene: SKScene {
         
         let rad = atan2(dy, dx)
         
-        Path = UIBezierPath(arcCenter: CGPoint(x: 0, y: 0), radius: 100, startAngle: CGFloat(Double.pi / 2), endAngle: rad + CGFloat(Double.pi * 4), clockwise: true)
+        Path = UIBezierPath(arcCenter: CGPoint(x: 0, y: 0), radius: clock.size.width/3 + 30, startAngle: CGFloat(Double.pi / 3), endAngle: rad + CGFloat(Double.pi * 4), clockwise: true)
         let follow = SKAction.follow(Path.cgPath, asOffset: false, orientToPath: true, speed: 200)
         
         return (SKAction.repeatForever(follow))
