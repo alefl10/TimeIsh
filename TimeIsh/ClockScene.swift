@@ -81,19 +81,21 @@ class ClockScene: SKScene {
         else if gameStarted {
             if movingClockwise {
                 hand.run(rotateHand().reversed())
-//                movingClockwise = false
-                timeZone.removeFromParent()
-                currentQuadrant = timeZoneNode.pickQuadrant(quadrant: currentQuadrant)
-                timeZone = timeZoneNode.timeZone
-                addChild(timeZoneNode.timeZone)
-//                timeZoneNode.timeZone.removeFromParent()
-//                addTimeZone()
+                updateTimeZone()
             }
             else if !movingClockwise {
                 hand.run(rotateHand())
                 movingClockwise = true
             }
         }
+    }
+    
+    
+    private func updateTimeZone() {
+        timeZone.removeFromParent()
+        currentQuadrant = timeZoneNode.pickQuadrant(quadrant: currentQuadrant)
+        timeZone = timeZoneNode.timeZone
+        addChild(timeZoneNode.timeZone)
     }
     
     
