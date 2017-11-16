@@ -11,6 +11,7 @@ import SpriteKit
 
 class ClockNode {
     
+    
     private var _clockScene = SKScene()
     private var _clockNode: SKSpriteNode!
     
@@ -18,13 +19,13 @@ class ClockNode {
     private final let CLOCK_HEIGHT = CGFloat(412.0)
     private final let Z_POSITION = CGFloat(0)
     
-    init(scene: SKScene) {
-        _clockScene = scene
+    var clock: SKSpriteNode {
+        return _clockNode
     }
     
-    var clock: SKSpriteNode {
+    init(scene: SKScene) {
+        _clockScene = scene
         createClockNode()
-        return _clockNode
     }
     
     private func createClockNode() {

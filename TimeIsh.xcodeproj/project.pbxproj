@@ -157,8 +157,8 @@
 			children = (
 				A9CF61891FBBE69D003526CE /* ClockNode.swift */,
 				A9CF618B1FBBF6C9003526CE /* HandNode.swift */,
-				A9CF618D1FBCF2F6003526CE /* TimeZoneNode.swift */,
 				A9CF61921FBD3E81003526CE /* DotNode.swift */,
+				A9CF618D1FBCF2F6003526CE /* TimeZoneNode.swift */,
 			);
 			path = GameNodes;
 			sourceTree = "<group>";

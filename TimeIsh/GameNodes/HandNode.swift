@@ -20,13 +20,13 @@ class HandNode {
     private final let Z_POSITION = CGFloat(2)
     
     var hand: SKSpriteNode {
-        createHandNode()
         return _handNode
     }
     
     init(scene: SKScene, clockNode: SKSpriteNode) {
         _clockScene = scene
         _clockNode = clockNode
+        createHandNode()
     }
     
     private func createHandNode() {

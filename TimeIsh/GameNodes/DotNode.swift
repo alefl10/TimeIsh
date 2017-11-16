@@ -22,13 +22,13 @@ class DotNode {
     private final let Z_POSITION = CGFloat(3)
     
     var dot: SKShapeNode {
-        createDotNode()
         return _dotNode
     }
     
     init(scene: SKScene, clockNode: SKSpriteNode) {
         _clockScene = scene
         _clockNode = clockNode
+        createDotNode()
     }
     
     private func createDotNode() {
@@ -36,8 +36,8 @@ class DotNode {
         path = UIBezierPath(ovalIn: CGRect(x: 0.0 - DOT_RADIUS/2, y: 0.0 - DOT_RADIUS/2, width: DOT_RADIUS, height: DOT_RADIUS))
         
         _dotNode = SKShapeNode(path: path.cgPath)
-        _dotNode.fillColor = .blue
-        _dotNode.strokeColor = .blue
+        _dotNode.fillColor = .red
+        _dotNode.strokeColor = .yellow
         _dotNode.zPosition = Z_POSITION
         
     }
