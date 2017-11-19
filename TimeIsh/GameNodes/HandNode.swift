@@ -30,10 +30,10 @@ class HandNode {
     }
     
     private func createHandNode() {
-        _handNode = SKSpriteNode(imageNamed: "Person")
-        _handNode.color = SKColor.black
+        _handNode = SKSpriteNode(imageNamed: "Hand")
+        _handNode.name = "handNode"
         _handNode.size = CGSize(width: _clockNode.size.width/2 - 20, height: HAND_HEIGHT)
-        _handNode.position = CGPoint(x: 0, y: _clockNode.size.width/4 - 3)
+        _handNode.position = CGPoint(x: 0, y: _clockNode.size.width/4)
         _handNode.zRotation = Z_ROTATION
         _handNode.zPosition = Z_POSITION
     }

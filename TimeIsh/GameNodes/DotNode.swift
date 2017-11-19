@@ -17,7 +17,7 @@ class DotNode {
     private var _dotNode: SKShapeNode!
     private var _clockNode: SKSpriteNode!
     
-    private final let DOT_RADIUS = CGFloat(25.0)
+    private final let DOT_RADIUS = CGFloat(50.0)
     
     private final let Z_POSITION = CGFloat(3)
     
@@ -38,6 +38,7 @@ class DotNode {
         _dotNode = SKShapeNode(path: path.cgPath)
         _dotNode.fillColor = .red
         _dotNode.strokeColor = .yellow
+        _dotNode.glowWidth = 2.0
         _dotNode.zPosition = Z_POSITION
         
     }
