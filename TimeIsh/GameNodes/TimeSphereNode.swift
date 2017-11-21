@@ -43,10 +43,6 @@ class TimeSphereNode {
     }
     
     func setRandomPosition(quadrant: String) -> String {
-//        let dx = -_clockScene.frame.width / 2
-//        let dy = _clockNode.size.width/4 - 3
-//        let rad = atan2(dy, dx)
-        
         let nextQuadrant = pickQuadrant(quadrant: quadrant)
         
         Path = UIBezierPath(arcCenter: CGPoint(x: 0, y: 0), radius: _clockNode.size.width/2 - 30, startAngle: startAngle, endAngle: startAngle + CGFloat(Double.pi * 4), clockwise: true)
@@ -72,19 +68,11 @@ class TimeSphereNode {
     
     private func pickQuadrant(quadrant: String) -> String {
         
-//        if start {
-//            startAngle = CGFloat.random(min: 270, max: 360).degreesToRadians
-//            print(startAngle)
-//            start = false
-//            return "q3"
-//        }
-        
         var newQuadrant: String
         switch quadrant {
         case "start":
             startAngle = CGFloat.random(min: 270, max: 310).degreesToRadians
             print(startAngle)
-//            createTimeZoneNode()
             return "q3"
         case "q1":
             repeat {
@@ -143,7 +131,6 @@ class TimeSphereNode {
     
     private func findStartAngle(){
         startAngle = CGFloat.random(min: 0, max: 365).degreesToRadians
-//        createTimeZoneNode()
         print(startAngle)
     }
     

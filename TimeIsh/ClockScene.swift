@@ -47,7 +47,7 @@ class ClockScene: SKScene {
     }
     
     
-    func loadView(){
+    private func loadView(){
         movingClockwise = true
         
         scene?.backgroundColor = SKColor.black
@@ -75,7 +75,6 @@ class ClockScene: SKScene {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if !gameStarted {
-//            addTimeSphere()
             hand.run(rotateHand().reversed())
             gameStarted = true
         } else {
@@ -99,7 +98,7 @@ class ClockScene: SKScene {
     }
     
     
-    func rotateHand() -> SKAction{
+    private func rotateHand() -> SKAction{
         let dx = hand.position.x
         let dy = hand.position.y
         
@@ -111,14 +110,23 @@ class ClockScene: SKScene {
         return (SKAction.repeatForever(follow))
     }
     
-    func died(){
+    private func won(){
+        self.removeAllChildren()
+        let action1 = SKAction.colorize(with: UIColor.green, colorBlendFactor: 1.0, duration: 0.2)
+        let action2 = SKAction.colorize(with: UIColor.black, colorBlendFactor: 1.0, duration: 0.2)
+        self.scene?.run(SKAction.sequence([action1,action2]))
+        intersected = false
+        gameStarted = false
+        self.loadView()
+    }
+    
+    private func died(){
         self.removeAllChildren()
         let action1 = SKAction.colorize(with: UIColor.red, colorBlendFactor: 1.0, duration: 0.2)
         let action2 = SKAction.colorize(with: UIColor.black, colorBlendFactor: 1.0, duration: 0.2)
         self.scene?.run(SKAction.sequence([action1,action2]))
         intersected = false
         gameStarted = false
-        //        LevelLabel.removeFromSuperview()
         //        currentScore = currentLevel
         self.loadView()
     }
@@ -152,21 +160,5 @@ class ClockScene: SKScene {
 //            Defaults.set(highLevel, forKey: "HighLevel")
 //        }
 //    }
-//
-//
-//
-//
-    func won(){
-        self.removeAllChildren()
-        let action1 = SKAction.colorize(with: UIColor.green, colorBlendFactor: 1.0, duration: 0.2)
-        let action2 = SKAction.colorize(with: UIColor.black, colorBlendFactor: 1.0, duration: 0.2)
-        self.scene?.run(SKAction.sequence([action1,action2]))
-        intersected = false
-        gameStarted = false
-//        LevelLabel.removeFromSuperview()
-        self.loadView()
-    }
-//
-//
     
 }
