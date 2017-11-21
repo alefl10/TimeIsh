@@ -15,8 +15,8 @@ class ClockNode {
     private var _clockScene = SKScene()
     private var _clockNode: SKSpriteNode!
     
-    private final let CLOCK_WIDTH = CGFloat(412.0)
-    private final let CLOCK_HEIGHT = CGFloat(412.0)
+    private final let CLOCK_WIDTH = CGFloat(312.0)
+    private final let CLOCK_HEIGHT = CGFloat(312.0)
     private final let Z_POSITION = CGFloat(0)
     
     var clock: SKSpriteNode {

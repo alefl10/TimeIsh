@@ -13,24 +13,23 @@ class ClockScene: SKScene {
     
     private var clockNode: ClockNode!
     private var handNode: HandNode!
-    private var timeZoneNode: TimeZoneNode!
+    private var timeSphereNode: TimeSphereNode!
     private var dotNode: DotNode!
     private var clock: SKSpriteNode!
     private var hand: SKSpriteNode!
-    private var timeZone: SKShapeNode!
+    private var timeSphere: SKSpriteNode!
     private var dot: SKShapeNode!
     
     private var gameStarted = false
+    private var intersected = false
     private var movingClockwise = Bool()
     private var currentQuadrant: String! = "start"
     
     private var Path = UIBezierPath()
     
-    private final let PROPORTION = CGFloat(10.0)
+//    private final let PROPORTION = CGFloat(10.0)
 
 //    MARK: FUTURE VARIABLES
-    
-//    var intersected = false
 
 //    var LevelLabel = UILabel()
 //
@@ -48,7 +47,7 @@ class ClockScene: SKScene {
     }
     
     
-    func loadView(){
+    private func loadView(){
         movingClockwise = true
         
         scene?.backgroundColor = SKColor.black
@@ -62,53 +61,89 @@ class ClockScene: SKScene {
         dotNode = DotNode(scene: scene!, clockNode: clockNode.clock)
         dot = dotNode.dot
         
-        timeZoneNode = TimeZoneNode(scene: scene!, clockNode: clockNode.clock, proportion: PROPORTION, quadrant: currentQuadrant)
-        timeZone = timeZoneNode.timeZone
+        timeSphereNode = TimeSphereNode(scene: scene!, clockNode: clockNode.clock)
+        currentQuadrant = timeSphereNode.setRandomPosition(quadrant: currentQuadrant)
+        timeSphere = timeSphereNode.timeSphere
+        
         
         self.addChild(clock)
         self.addChild(hand)
         self.addChild(dot)
-        self.addChild(timeZone)
+        self.addChild(timeSphere)
     }
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if !gameStarted {
             hand.run(rotateHand().reversed())
-            movingClockwise = true
             gameStarted = true
-        }
-        else if gameStarted {
-            if movingClockwise {
-                hand.run(rotateHand().reversed())
-                updateTimeZone()
-            }
-            else if !movingClockwise {
-                hand.run(rotateHand())
-                movingClockwise = true
+        } else {
+            addTimeSphere()
+            hand.run(rotateHand().reversed())
+            if intersected == true {
+                won()
+            } else {
+                died()
             }
         }
     }
     
-    
-    private func updateTimeZone() {
-        timeZone.removeFromParent()
-        currentQuadrant = timeZoneNode.pickQuadrant(quadrant: currentQuadrant)
-        timeZone = timeZoneNode.timeZone
-        addChild(timeZoneNode.timeZone)
+    private func addTimeSphere() {
+        timeSphere.removeFromParent()
+        print("Current quadrant: \(currentQuadrant!)")
+        currentQuadrant = timeSphereNode.setRandomPosition(quadrant: currentQuadrant)
+        timeSphere = timeSphereNode.timeSphere
+        print("Next quadrant: \(currentQuadrant!)")
+        addChild(timeSphere)
     }
     
     
-    func rotateHand() -> SKAction{
+    private func rotateHand() -> SKAction{
         let dx = hand.position.x
         let dy = hand.position.y
         
         let rad = atan2(dy, dx)
         
-        Path = UIBezierPath(arcCenter: CGPoint(x: 0, y: 0), radius: clock.size.width/3 + 30, startAngle: CGFloat(Double.pi / 3), endAngle: rad + CGFloat(Double.pi * 4), clockwise: true)
-        let follow = SKAction.follow(Path.cgPath, asOffset: false, orientToPath: true, speed: 200)
+        Path = UIBezierPath(arcCenter: CGPoint(x: 0, y: 0), radius: clock.size.width/4, startAngle: CGFloat(Double.pi / 2), endAngle: rad + CGFloat(Double.pi * 4), clockwise: true)
+        let follow = SKAction.follow(Path.cgPath, asOffset: false, orientToPath: true, speed: 100)
         
         return (SKAction.repeatForever(follow))
+    }
+    
+    private func won(){
+        self.removeAllChildren()
+        let action1 = SKAction.colorize(with: UIColor.green, colorBlendFactor: 1.0, duration: 0.2)
+        let action2 = SKAction.colorize(with: UIColor.black, colorBlendFactor: 1.0, duration: 0.2)
+        self.scene?.run(SKAction.sequence([action1,action2]))
+        intersected = false
+        gameStarted = false
+        self.loadView()
+    }
+    
+    private func died(){
+        self.removeAllChildren()
+        let action1 = SKAction.colorize(with: UIColor.red, colorBlendFactor: 1.0, duration: 0.2)
+        let action2 = SKAction.colorize(with: UIColor.black, colorBlendFactor: 1.0, duration: 0.2)
+        self.scene?.run(SKAction.sequence([action1,action2]))
+        intersected = false
+        gameStarted = false
+        //        currentScore = currentLevel
+        self.loadView()
+    }
+    
+    override func update(_ currentTime: CFTimeInterval) {
+        /* Called before each frame is rendered */
+        
+        if hand.intersects(timeSphere){
+            intersected = true
+        }
+        else{
+            if intersected == true{
+                if hand.intersects(timeSphere) == false{
+                    died()
+                }
+            }
+        }
     }
     
     
@@ -123,49 +158,6 @@ class ClockScene: SKScene {
 //            highLevel = currentLevel
 //            let Defaults = UserDefaults.standard
 //            Defaults.set(highLevel, forKey: "HighLevel")
-//        }
-//    }
-//
-//
-//    func died(){
-//        self.removeAllChildren()
-//        let action1 = SKAction.colorize(with: UIColor.red, colorBlendFactor: 1.0, duration: 0.2)
-//        let action2 = SKAction.colorize(with: UIColor.black, colorBlendFactor: 1.0, duration: 0.2)
-//        self.scene?.run(SKAction.sequence([action1,action2]))
-//        intersected = false
-//        gameStarted = false
-//        LevelLabel.removeFromSuperview()
-//        currentScore = currentLevel
-//        self.loadView()
-//    }
-//
-//
-//    func won(){
-//        self.removeAllChildren()
-//        let action1 = SKAction.colorize(with: UIColor.green, colorBlendFactor: 1.0, duration: 0.2)
-//        let action2 = SKAction.colorize(with: UIColor.black, colorBlendFactor: 1.0, duration: 0.2)
-//        self.scene?.run(SKAction.sequence([action1,action2]))
-//        intersected = false
-//        gameStarted = false
-//        LevelLabel.removeFromSuperview()
-//        self.loadView()
-//    }
-//
-//
-//    override func update(_ currentTime: CFTimeInterval) {
-//        /* Called before each frame is rendered */
-//
-//        if hand.intersects(Dot){
-//            intersected = true
-//
-//        }
-//        else{
-//            if intersected == true{
-//                if hand.intersects(Dot) == false{
-//                    died()
-//                }
-//
-//            }
 //        }
 //    }
     

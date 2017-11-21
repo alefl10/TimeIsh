@@ -24,6 +24,7 @@
 		A9CF618E1FBCF2F6003526CE /* TimeZoneNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CF618D1FBCF2F6003526CE /* TimeZoneNode.swift */; };
 		A9CF61911FBCF7F0003526CE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CF61901FBCF7F0003526CE /* Extensions.swift */; };
 		A9CF61931FBD3E81003526CE /* DotNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CF61921FBD3E81003526CE /* DotNode.swift */; };
+		A9CF61971FC0F638003526CE /* TimeSphereNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CF61961FC0F638003526CE /* TimeSphereNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		A9CF618D1FBCF2F6003526CE /* TimeZoneNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeZoneNode.swift; sourceTree = "<group>"; };
 		A9CF61901FBCF7F0003526CE /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		A9CF61921FBD3E81003526CE /* DotNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotNode.swift; sourceTree = "<group>"; };
+		A9CF61961FC0F638003526CE /* TimeSphereNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSphereNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +161,7 @@
 				A9CF618B1FBBF6C9003526CE /* HandNode.swift */,
 				A9CF61921FBD3E81003526CE /* DotNode.swift */,
 				A9CF618D1FBCF2F6003526CE /* TimeZoneNode.swift */,
+				A9CF61961FC0F638003526CE /* TimeSphereNode.swift */,
 			);
 			path = GameNodes;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 				A9CF618A1FBBE69D003526CE /* ClockNode.swift in Sources */,
 				A9CF61911FBCF7F0003526CE /* Extensions.swift in Sources */,
 				A9037ED81FBAC09C00D75F46 /* GameScene.swift in Sources */,
+				A9CF61971FC0F638003526CE /* TimeSphereNode.swift in Sources */,
 				A9CF618C1FBBF6C9003526CE /* HandNode.swift in Sources */,
 				A93730EC1FBACB0C0048F2C0 /* ClockScene.swift in Sources */,
 				A9037EDA1FBAC09C00D75F46 /* GameViewController.swift in Sources */,
@@ -485,6 +489,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U7MF9Z2ZJF;
 				INFOPLIST_FILE = TimeIsh/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = AFL.TimeIsh;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -500,6 +505,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U7MF9Z2ZJF;
 				INFOPLIST_FILE = TimeIsh/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = AFL.TimeIsh;
 				PRODUCT_NAME = "$(TARGET_NAME)";

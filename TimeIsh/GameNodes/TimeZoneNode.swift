@@ -9,6 +9,8 @@
 import Foundation
 import SpriteKit
 
+// MARK: This class cannot be used as the size of the _timeZoneNode cannot be determined precisely
+
 class TimeZoneNode {
     
     private var path: UIBezierPath!
