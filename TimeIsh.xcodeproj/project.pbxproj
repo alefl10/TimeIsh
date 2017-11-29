@@ -25,6 +25,10 @@
 		A9CF61911FBCF7F0003526CE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CF61901FBCF7F0003526CE /* Extensions.swift */; };
 		A9CF61931FBD3E81003526CE /* DotNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CF61921FBD3E81003526CE /* DotNode.swift */; };
 		A9CF61971FC0F638003526CE /* TimeSphereNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CF61961FC0F638003526CE /* TimeSphereNode.swift */; };
+		A9FCD9641FCE89350042FF21 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FCD9631FCE89350042FF21 /* CoreDataController.swift */; };
+		A9FCD9671FCE89B50042FF21 /* TimeIsh.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A9FCD9651FCE89B50042FF21 /* TimeIsh.xcdatamodeld */; };
+		A9FCD9691FCE8A710042FF21 /* CoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FCD9681FCE8A710042FF21 /* CoreDataHandler.swift */; };
+		A9FCD96B1FCE9D490042FF21 /* LevelHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FCD96A1FCE9D490042FF21 /* LevelHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +73,10 @@
 		A9CF61901FBCF7F0003526CE /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		A9CF61921FBD3E81003526CE /* DotNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotNode.swift; sourceTree = "<group>"; };
 		A9CF61961FC0F638003526CE /* TimeSphereNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSphereNode.swift; sourceTree = "<group>"; };
+		A9FCD9631FCE89350042FF21 /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
+		A9FCD9661FCE89B50042FF21 /* TimeIsh.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TimeIsh.xcdatamodel; sourceTree = "<group>"; };
+		A9FCD9681FCE8A710042FF21 /* CoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHandler.swift; sourceTree = "<group>"; };
+		A9FCD96A1FCE9D490042FF21 /* LevelHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +129,7 @@
 			children = (
 				A9CF61881FBBE676003526CE /* GameNodes */,
 				A9CF618F1FBCF7D6003526CE /* Extensions */,
+				A9FCD9621FCE890C0042FF21 /* CoreData */,
 				A9037ED11FBAC09C00D75F46 /* AppDelegate.swift */,
 				A9037ED91FBAC09C00D75F46 /* GameViewController.swift */,
 				A9037ED51FBAC09C00D75F46 /* Actions.sks */,
@@ -128,6 +137,7 @@
 				A9037ED31FBAC09C00D75F46 /* GameScene.sks */,
 				A93730EB1FBACB0C0048F2C0 /* ClockScene.swift */,
 				A93730ED1FBACB720048F2C0 /* ClockScene.sks */,
+				A9FCD96A1FCE9D490042FF21 /* LevelHandler.swift */,
 				A9037EDB1FBAC09C00D75F46 /* Main.storyboard */,
 				A9037EDE1FBAC09C00D75F46 /* Assets.xcassets */,
 				A9037EE01FBAC09C00D75F46 /* LaunchScreen.storyboard */,
@@ -172,6 +182,16 @@
 				A9CF61901FBCF7F0003526CE /* Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		A9FCD9621FCE890C0042FF21 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				A9FCD9631FCE89350042FF21 /* CoreDataController.swift */,
+				A9FCD9681FCE8A710042FF21 /* CoreDataHandler.swift */,
+				A9FCD9651FCE89B50042FF21 /* TimeIsh.xcdatamodeld */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -313,14 +333,18 @@
 			files = (
 				A9CF618A1FBBE69D003526CE /* ClockNode.swift in Sources */,
 				A9CF61911FBCF7F0003526CE /* Extensions.swift in Sources */,
+				A9FCD9691FCE8A710042FF21 /* CoreDataHandler.swift in Sources */,
 				A9037ED81FBAC09C00D75F46 /* GameScene.swift in Sources */,
 				A9CF61971FC0F638003526CE /* TimeSphereNode.swift in Sources */,
+				A9FCD96B1FCE9D490042FF21 /* LevelHandler.swift in Sources */,
 				A9CF618C1FBBF6C9003526CE /* HandNode.swift in Sources */,
 				A93730EC1FBACB0C0048F2C0 /* ClockScene.swift in Sources */,
+				A9FCD9641FCE89350042FF21 /* CoreDataController.swift in Sources */,
 				A9037EDA1FBAC09C00D75F46 /* GameViewController.swift in Sources */,
 				A9CF618E1FBCF2F6003526CE /* TimeZoneNode.swift in Sources */,
 				A9CF61931FBD3E81003526CE /* DotNode.swift in Sources */,
 				A9037ED21FBAC09C00D75F46 /* AppDelegate.swift in Sources */,
+				A9FCD9671FCE89B50042FF21 /* TimeIsh.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -620,6 +644,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		A9FCD9651FCE89B50042FF21 /* TimeIsh.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A9FCD9661FCE89B50042FF21 /* TimeIsh.xcdatamodel */,
+			);
+			currentVersion = A9FCD9661FCE89B50042FF21 /* TimeIsh.xcdatamodel */;
+			path = TimeIsh.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = A9037EC61FBAC09C00D75F46 /* Project object */;
 }

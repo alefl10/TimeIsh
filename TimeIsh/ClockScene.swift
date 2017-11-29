@@ -20,14 +20,23 @@ class ClockScene: SKScene {
     private var timeSphere: SKSpriteNode!
     private var dot: SKShapeNode!
     
+    private var highScoreLabel : SKLabelNode!
+    private var underHighScoreLabel : SKLabelNode!
+    private var currentLevelLabel : SKLabelNode!
+    private var underCurrentLevelLabel : SKLabelNode!
+    
     private var gameStarted = false
     private var intersected = false
     private var movingClockwise = Bool()
     private var currentQuadrant: String! = "start"
+    private var currentSpeed = CGFloat(150)
+    private var highestScore = 0
+    private var currentLevel = 0
     
     private var Path = UIBezierPath()
     
-//    private final let PROPORTION = CGFloat(10.0)
+    private let coreData = CoreDataHandler()
+    private let levelHandler = LevelHandler()
 
 //    MARK: FUTURE VARIABLES
 
@@ -65,11 +74,52 @@ class ClockScene: SKScene {
         currentQuadrant = timeSphereNode.setRandomPosition(quadrant: currentQuadrant)
         timeSphere = timeSphereNode.timeSphere
         
-        
         self.addChild(clock)
         self.addChild(hand)
         self.addChild(dot)
         self.addChild(timeSphere)
+        
+        addLabels()
+    }
+    
+    private func addLabels() {
+        highestScore = coreData.getHighestScore()
+        highScoreLabel = SKLabelNode()
+        highScoreLabel.position = CGPoint(x: 110, y: -280)
+        highScoreLabel.text = "\(highestScore)"
+        highScoreLabel.color = SKColor.white
+        highScoreLabel.fontName = "Menlo"
+        highScoreLabel.fontSize = 100
+        highScoreLabel.zPosition = 4
+        
+        underHighScoreLabel = SKLabelNode()
+        underHighScoreLabel.position = CGPoint(x: 110, y: -310)
+        underHighScoreLabel.text = "Record"
+        underHighScoreLabel.color = SKColor.white
+        underHighScoreLabel.fontName = "Menlo"
+        underHighScoreLabel.fontSize = 20
+        underHighScoreLabel.zPosition = 4
+        
+        currentLevelLabel = SKLabelNode()
+        currentLevelLabel.position = CGPoint(x: -110, y: -280)
+        currentLevelLabel.text = "\(currentLevel)"
+        currentLevelLabel.color = SKColor.white
+        currentLevelLabel.fontName = "Menlo"
+        currentLevelLabel.fontSize = 100
+        currentLevelLabel.zPosition = 4
+        
+        underCurrentLevelLabel = SKLabelNode()
+        underCurrentLevelLabel.position = CGPoint(x: -110, y: -310)
+        underCurrentLevelLabel.text = "Level"
+        underCurrentLevelLabel.color = SKColor.white
+        underCurrentLevelLabel.fontName = "Menlo"
+        underCurrentLevelLabel.fontSize = 20
+        underCurrentLevelLabel.zPosition = 4
+        
+        self.addChild(highScoreLabel)
+        self.addChild(underHighScoreLabel)
+        self.addChild(currentLevelLabel)
+        self.addChild(underCurrentLevelLabel)
     }
     
     
@@ -105,7 +155,7 @@ class ClockScene: SKScene {
         let rad = atan2(dy, dx)
         
         Path = UIBezierPath(arcCenter: CGPoint(x: 0, y: 0), radius: clock.size.width/4, startAngle: CGFloat(Double.pi / 2), endAngle: rad + CGFloat(Double.pi * 4), clockwise: true)
-        let follow = SKAction.follow(Path.cgPath, asOffset: false, orientToPath: true, speed: 100)
+        let follow = SKAction.follow(Path.cgPath, asOffset: false, orientToPath: true, speed: currentSpeed)
         
         return (SKAction.repeatForever(follow))
     }
