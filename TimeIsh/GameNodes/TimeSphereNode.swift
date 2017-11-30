@@ -12,7 +12,7 @@ import SpriteKit
 class TimeSphereNode {
     private var _clockScene = SKScene()
     private var _timeSphere: SKSpriteNode!
-    private var _clockNode: SKSpriteNode!
+    private final let CLOCK_WIDTH = CGFloat(312/2)
     
     private var startAngle: CGFloat!
     private var min = CGFloat(180)
@@ -29,9 +29,8 @@ class TimeSphereNode {
         return _timeSphere
     }
     
-    init(scene: SKScene, clockNode: SKSpriteNode) {
+    init(scene: SKScene) {
         _clockScene = scene
-        _clockNode = clockNode
         createTimeSphereNode()
     }
     
@@ -45,24 +44,9 @@ class TimeSphereNode {
     func setRandomPosition(quadrant: String) -> String {
         let nextQuadrant = pickQuadrant(quadrant: quadrant)
         
-        Path = UIBezierPath(arcCenter: CGPoint(x: 0, y: 0), radius: _clockNode.size.width/2 - 30, startAngle: startAngle, endAngle: startAngle + CGFloat(Double.pi * 4), clockwise: true)
+        Path = UIBezierPath(arcCenter: CGPoint(x: 0, y: 0), radius: CLOCK_WIDTH - 30, startAngle: startAngle, endAngle: startAngle + CGFloat(Double.pi * 4), clockwise: true)
         _timeSphere.position = Path.currentPoint
         return nextQuadrant
-        
-        //        MARK: In case setRandomPosition had a direction: String argument
-        
-//        switch direction {
-//        case "clockwise":
-//            let tempAngle = CGFloat.random(min: rad - 1.0, max: rad - 2.5)
-//            Path = UIBezierPath(arcCenter: CGPoint(x: 0, y: 0), radius: 165, startAngle: tempAngle, endAngle: tempAngle + CGFloat(Double.pi * 4), clockwise: true)
-//            _timeSphere.position = Path.currentPoint
-//        case "counterClockwise":
-//            let tempAngle = CGFloat.random(min: rad + 1.0, max: rad + 2.5)
-//            Path = UIBezierPath(arcCenter: CGPoint(x: 0, y: 0), radius: 165, startAngle: tempAngle, endAngle: tempAngle + CGFloat(Double.pi * 4), clockwise: true)
-//            _timeSphere.position = Path.currentPoint
-//        default:
-//            print("direction argument was passed with a wrong value: \(direction)")
-//        }
     }
     
     
@@ -77,10 +61,10 @@ class TimeSphereNode {
         case "q1":
             repeat {
                 findStartAngle()
-            } while (startAngle <= CGFloat(90).degreesToRadians)
-            if startAngle <= CGFloat(180).degreesToRadians {
+            } while (startAngle <= CGFloat(80).degreesToRadians)
+            if startAngle >= CGFloat(95).degreesToRadians && startAngle <= CGFloat(175).degreesToRadians {
                 newQuadrant = "q2"
-            } else if (startAngle >= CGFloat(180).degreesToRadians) && (startAngle <= CGFloat(270).degreesToRadians) {
+            } else if (startAngle >= CGFloat(185).degreesToRadians) && (startAngle <= CGFloat(265).degreesToRadians) {
                 newQuadrant = "q3"
             } else {
                 newQuadrant = "q4"
@@ -89,10 +73,10 @@ class TimeSphereNode {
         case "q2":
             repeat {
                 findStartAngle()
-            } while (startAngle >= CGFloat(90).degreesToRadians && startAngle <= CGFloat(180).degreesToRadians)
-            if startAngle <= CGFloat(90).degreesToRadians {
+            } while (startAngle >= CGFloat(100).degreesToRadians && startAngle <= CGFloat(175).degreesToRadians)
+            if startAngle >= CGFloat(5).degreesToRadians && startAngle <= CGFloat(80).degreesToRadians {
                 newQuadrant = "q1"
-            } else if (startAngle >= CGFloat(180).degreesToRadians) && (startAngle <= CGFloat(270).degreesToRadians) {
+            } else if (startAngle >= CGFloat(185).degreesToRadians) && (startAngle <= CGFloat(265).degreesToRadians) {
                 newQuadrant = "q3"
             } else {
                 newQuadrant = "q4"
@@ -101,10 +85,10 @@ class TimeSphereNode {
         case "q3":
             repeat {
                 findStartAngle()
-            } while (startAngle >= CGFloat(180).degreesToRadians && startAngle <= CGFloat(270).degreesToRadians)
-            if startAngle <= CGFloat(90).degreesToRadians {
+            } while (startAngle >= CGFloat(185).degreesToRadians && startAngle <= CGFloat(265).degreesToRadians)
+            if startAngle >= CGFloat(5).degreesToRadians && startAngle <= CGFloat(80).degreesToRadians {
                 newQuadrant = "q1"
-            } else if (startAngle >= CGFloat(90).degreesToRadians) && (startAngle <= CGFloat(180).degreesToRadians) {
+            } else if startAngle >= CGFloat(100).degreesToRadians && startAngle <= CGFloat(175).degreesToRadians {
                 newQuadrant = "q2"
             } else {
                 newQuadrant = "q4"
@@ -113,10 +97,10 @@ class TimeSphereNode {
         case "q4":
             repeat {
                 findStartAngle()
-            } while (startAngle >= CGFloat(270).degreesToRadians)
-            if startAngle <= CGFloat(90).degreesToRadians {
+            } while (startAngle >= CGFloat(275).degreesToRadians && startAngle <= CGFloat(360).degreesToRadians)
+            if startAngle >= CGFloat(5).degreesToRadians && startAngle <= CGFloat(80).degreesToRadians {
                 newQuadrant = "q1"
-            } else if (startAngle >= CGFloat(90).degreesToRadians) && (startAngle <= CGFloat(180).degreesToRadians) {
+            } else if startAngle >= CGFloat(100).degreesToRadians && startAngle <= CGFloat(175).degreesToRadians {
                 newQuadrant = "q2"
             } else {
                 newQuadrant = "q3"
@@ -130,7 +114,9 @@ class TimeSphereNode {
     
     
     private func findStartAngle(){
-        startAngle = CGFloat.random(min: 0, max: 365).degreesToRadians
+        repeat{
+            startAngle = CGFloat.random(min: 0, max: 365).degreesToRadians
+        } while (startAngle>=CGFloat(80).degreesToRadians && startAngle<=CGFloat(100).degreesToRadians || startAngle>=CGFloat(175).degreesToRadians && startAngle<=CGFloat(185).degreesToRadians || startAngle>=CGFloat(265).degreesToRadians && startAngle<=CGFloat(275).degreesToRadians || startAngle>=CGFloat(365).degreesToRadians && startAngle<=CGFloat(5).degreesToRadians)
         print(startAngle)
     }
     

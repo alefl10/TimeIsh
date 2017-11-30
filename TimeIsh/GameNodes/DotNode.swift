@@ -18,7 +18,6 @@ class DotNode {
     
     private var _clockScene = SKScene()
     private var _dotNode: SKShapeNode!
-    private var _clockNode: SKSpriteNode!
     
     private final let DOT_RADIUS = CGFloat(50.0)
     
@@ -28,9 +27,8 @@ class DotNode {
         return _dotNode
     }
     
-    init(scene: SKScene, clockNode: SKSpriteNode) {
+    init(scene: SKScene) {
         _clockScene = scene
-        _clockNode = clockNode
         createDotNode()
     }
     

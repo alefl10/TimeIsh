@@ -13,11 +13,11 @@ class ClockScene: SKScene {
     
     private var clockNode: ClockNode!
     private var handNode: HandNode!
-    private var timeSphereNode: TimeSphereNode!
+//    private var timeSphereNode: TimeSphereNode!
     private var dotNode: DotNode!
     private var clock: SKSpriteNode!
     private var hand: SKSpriteNode!
-    private var timeSphere: SKSpriteNode!
+//    private var timeSpheres = [SKSpriteNode]()
     private var dot: SKShapeNode!
     
     private var highScoreLabel : SKLabelNode!
@@ -28,10 +28,12 @@ class ClockScene: SKScene {
     private var gameStarted = false
     private var intersected = false
     private var movingClockwise = Bool()
-    private var currentQuadrant: String! = "start"
-    private var currentSpeed = CGFloat(150)
-    private var highestScore = 0
-    private var currentLevel = 0
+//    private var currentQuadrant: String! = "start"
+    private var currentSpeed = CGFloat(125)
+    private var highestScore = 1
+    private var currentLevel = 1
+    
+    private var mustTapTimeSphere: SKSpriteNode!
     
     private var Path = UIBezierPath()
     
@@ -63,23 +65,21 @@ class ClockScene: SKScene {
         
         clockNode = ClockNode(scene: scene!)
         clock = clockNode.clock
-        
-        handNode = HandNode(scene: scene!, clockNode: clockNode.clock)
+        handNode = HandNode(scene: scene!)
         hand = handNode.hand
-        
-        dotNode = DotNode(scene: scene!, clockNode: clockNode.clock)
+        dotNode = DotNode(scene: scene!)
         dot = dotNode.dot
-        
-        timeSphereNode = TimeSphereNode(scene: scene!, clockNode: clockNode.clock)
-        currentQuadrant = timeSphereNode.setRandomPosition(quadrant: currentQuadrant)
-        timeSphere = timeSphereNode.timeSphere
         
         self.addChild(clock)
         self.addChild(hand)
         self.addChild(dot)
-        self.addChild(timeSphere)
-        
         addLabels()
+        
+        levelHandler.nextLevel(scene: scene!, level: currentLevel)
+        
+//        for index in 0..<currentLevel {
+//            addTimeSphere(index: index)
+//        }
     }
     
     private func addLabels() {
@@ -128,30 +128,38 @@ class ClockScene: SKScene {
             hand.run(rotateHand().reversed())
             gameStarted = true
         } else {
-            addTimeSphere()
             hand.run(rotateHand().reversed())
-            if intersected == true {
-                won()
+            if intersected {
+                levelHandler.deleteTimeSphere(mustTapTimeSphere: mustTapTimeSphere)
+                intersected = false
+                if levelHandler._timeSpheres.count == 0 {
+                    won()
+                }
             } else {
                 died()
             }
         }
     }
     
-    private func addTimeSphere() {
-        timeSphere.removeFromParent()
-        print("Current quadrant: \(currentQuadrant!)")
-        currentQuadrant = timeSphereNode.setRandomPosition(quadrant: currentQuadrant)
-        timeSphere = timeSphereNode.timeSphere
-        print("Next quadrant: \(currentQuadrant!)")
-        addChild(timeSphere)
-    }
+//    private func addTimeSphere(index: Int) {
+//        let timeSphereNode = TimeSphereNode(scene: scene!, clockNode: clockNode.clock)
+//        currentQuadrant = timeSphereNode.setRandomPosition(quadrant: currentQuadrant)
+//        timeSpheres.append(timeSphereNode.timeSphere)
+//        print("Next quadrant: \(currentQuadrant!)")
+//        addChild(timeSpheres[index])
+//    }
+    
+//    private func deleteTimeSphere() {
+//        mustTapTimeSphere.removeFromParent()
+//        let indexRemove = timeSpheres.index(of: mustTapTimeSphere)
+//        timeSpheres.remove(at: indexRemove!)
+//        intersected = false
+//    }
     
     
     private func rotateHand() -> SKAction{
         let dx = hand.position.x
         let dy = hand.position.y
-        
         let rad = atan2(dy, dx)
         
         Path = UIBezierPath(arcCenter: CGPoint(x: 0, y: 0), radius: clock.size.width/4, startAngle: CGFloat(Double.pi / 2), endAngle: rad + CGFloat(Double.pi * 4), clockwise: true)
@@ -161,39 +169,49 @@ class ClockScene: SKScene {
     }
     
     private func won(){
-        self.removeAllChildren()
+        resetScene()
         let action1 = SKAction.colorize(with: UIColor.green, colorBlendFactor: 1.0, duration: 0.2)
         let action2 = SKAction.colorize(with: UIColor.black, colorBlendFactor: 1.0, duration: 0.2)
         self.scene?.run(SKAction.sequence([action1,action2]))
-        intersected = false
-        gameStarted = false
+        currentLevel += 1
+//        currentSpeed += levelHandler.nextLevel(scene: scene!, level: currentLevel)
         self.loadView()
     }
     
     private func died(){
-        self.removeAllChildren()
+        resetScene()
+        currentLevel = 1
         let action1 = SKAction.colorize(with: UIColor.red, colorBlendFactor: 1.0, duration: 0.2)
         let action2 = SKAction.colorize(with: UIColor.black, colorBlendFactor: 1.0, duration: 0.2)
         self.scene?.run(SKAction.sequence([action1,action2]))
-        intersected = false
-        gameStarted = false
         //        currentScore = currentLevel
         self.loadView()
+    }
+    
+    private func resetScene() {
+        self.removeAllChildren()
+        levelHandler.reset()
+        intersected = false
+        gameStarted = false
     }
     
     override func update(_ currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
         
-        if hand.intersects(timeSphere){
-            intersected = true
-        }
-        else{
-            if intersected == true{
-                if hand.intersects(timeSphere) == false{
-                    died()
+        for timeSphere in levelHandler._timeSpheres {
+            if hand.intersects(timeSphere){
+                intersected = true
+                mustTapTimeSphere = timeSphere
+            }
+            else {
+                if intersected == true {
+                    if hand.intersects(mustTapTimeSphere) == false{
+                        died()
+                    }
                 }
             }
         }
+        
     }
     
     
