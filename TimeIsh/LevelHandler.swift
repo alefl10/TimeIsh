@@ -16,7 +16,7 @@ class LevelHandler {
     private var currentQuadrant: String! = "start"
     private let coreData = CoreDataHandler()
     
-    private final let SPEED_FACTOR = CGFloat(1.75)
+    private final let SPEED_FACTOR = CGFloat(1.5)
     private final let EASY = 5
     private final let MEDIUM = 10
     private final let HARD = 15
@@ -41,17 +41,18 @@ class LevelHandler {
         case 1...5:
             multipleDots(level: level)
             return 0
-        case 5...10:
+        case 6...10:
             multipleDots(level: EASY)
-            return CGFloat(level) * SPEED_FACTOR
-//        case 10..<15:
-//        //Decrease TimeSphere size
+            return CGFloat(EASY) * SPEED_FACTOR
+        case 11...100:
+            multipleDots(level: EASY)
+            return CGFloat(MEDIUM) * SPEED_FACTOR
 //        case 15..<20:
 //        //Bonus Levels
         default:
             multipleDots(level: 5)
             print("New levels are yet to come")
-            return 100
+            return CGFloat(MEDIUM) * SPEED_FACTOR
         }
     }
     

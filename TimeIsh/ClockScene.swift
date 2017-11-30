@@ -58,9 +58,10 @@ class ClockScene: SKScene {
         self.addChild(clock)
         self.addChild(hand)
         self.addChild(dot)
-        addLabels()
-        
+    
         currentSpeed += levelHandler.nextLevel(scene: scene!, level: currentLevel)
+        
+        addLabels()
     }
    
     
@@ -169,7 +170,7 @@ class ClockScene: SKScene {
         switch currentLevel {
         case 1...5:
             currentLevel = 1
-        case 6...10:
+        case 6...9:
             currentLevel = 6
         default:
             currentLevel = 10
