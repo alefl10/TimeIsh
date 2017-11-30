@@ -13,47 +13,32 @@ class ClockScene: SKScene {
     
     private var clockNode: ClockNode!
     private var handNode: HandNode!
-//    private var timeSphereNode: TimeSphereNode!
     private var dotNode: DotNode!
     private var clock: SKSpriteNode!
     private var hand: SKSpriteNode!
-//    private var timeSpheres = [SKSpriteNode]()
     private var dot: SKShapeNode!
-    
+    private var mustTapTimeSphere: SKSpriteNode!
     private var highScoreLabel : SKLabelNode!
     private var underHighScoreLabel : SKLabelNode!
     private var currentLevelLabel : SKLabelNode!
     private var underCurrentLevelLabel : SKLabelNode!
     
+    private final let INITIAL_SPEED = CGFloat(125)
     private var gameStarted = false
     private var intersected = false
     private var movingClockwise = Bool()
-//    private var currentQuadrant: String! = "start"
-    private var currentSpeed = CGFloat(125)
+    private var currentSpeed: CGFloat = 0.0
     private var highestScore = 1
     private var currentLevel = 1
-    
-    private var mustTapTimeSphere: SKSpriteNode!
     
     private var Path = UIBezierPath()
     
     private let coreData = CoreDataHandler()
     private let levelHandler = LevelHandler()
-
-//    MARK: FUTURE VARIABLES
-
-//    var LevelLabel = UILabel()
-//
-//
-//    var currentLevel = Int()
-//    var currentScore = Int()
-//    var highLevel = Int()
-//
-//    var View1 = UIView()
-//    var View2 = UIView()
     
     
     override func didMove(to view: SKView) {
+        currentSpeed = INITIAL_SPEED
         loadView()
     }
     
@@ -75,12 +60,9 @@ class ClockScene: SKScene {
         self.addChild(dot)
         addLabels()
         
-        levelHandler.nextLevel(scene: scene!, level: currentLevel)
-        
-//        for index in 0..<currentLevel {
-//            addTimeSphere(index: index)
-//        }
+        currentSpeed += levelHandler.nextLevel(scene: scene!, level: currentLevel)
     }
+   
     
     private func addLabels() {
         highestScore = coreData.getHighestScore()
@@ -141,21 +123,6 @@ class ClockScene: SKScene {
         }
     }
     
-//    private func addTimeSphere(index: Int) {
-//        let timeSphereNode = TimeSphereNode(scene: scene!, clockNode: clockNode.clock)
-//        currentQuadrant = timeSphereNode.setRandomPosition(quadrant: currentQuadrant)
-//        timeSpheres.append(timeSphereNode.timeSphere)
-//        print("Next quadrant: \(currentQuadrant!)")
-//        addChild(timeSpheres[index])
-//    }
-    
-//    private func deleteTimeSphere() {
-//        mustTapTimeSphere.removeFromParent()
-//        let indexRemove = timeSpheres.index(of: mustTapTimeSphere)
-//        timeSpheres.remove(at: indexRemove!)
-//        intersected = false
-//    }
-    
     
     private func rotateHand() -> SKAction{
         let dx = hand.position.x
@@ -168,25 +135,27 @@ class ClockScene: SKScene {
         return (SKAction.repeatForever(follow))
     }
     
+    
     private func won(){
         resetScene()
         let action1 = SKAction.colorize(with: UIColor.green, colorBlendFactor: 1.0, duration: 0.2)
         let action2 = SKAction.colorize(with: UIColor.black, colorBlendFactor: 1.0, duration: 0.2)
         self.scene?.run(SKAction.sequence([action1,action2]))
         currentLevel += 1
-//        currentSpeed += levelHandler.nextLevel(scene: scene!, level: currentLevel)
         self.loadView()
     }
     
+    
     private func died(){
         resetScene()
-        currentLevel = 1
+        levelDown()
+        currentSpeed = INITIAL_SPEED
         let action1 = SKAction.colorize(with: UIColor.red, colorBlendFactor: 1.0, duration: 0.2)
         let action2 = SKAction.colorize(with: UIColor.black, colorBlendFactor: 1.0, duration: 0.2)
         self.scene?.run(SKAction.sequence([action1,action2]))
-        //        currentScore = currentLevel
         self.loadView()
     }
+    
     
     private func resetScene() {
         self.removeAllChildren()
@@ -194,6 +163,19 @@ class ClockScene: SKScene {
         intersected = false
         gameStarted = false
     }
+    
+    
+    private func levelDown() {
+        switch currentLevel {
+        case 1...5:
+            currentLevel = 1
+        case 6...10:
+            currentLevel = 6
+        default:
+            currentLevel = 10
+        }
+    }
+    
     
     override func update(_ currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
@@ -213,20 +195,5 @@ class ClockScene: SKScene {
         }
         
     }
-    
-    
-//    MARK: FUTURE METHODS
-    
-//    func nextLevel(){
-//        currentLevel += 1
-//        currentScore = currentLevel
-//        LevelLabel.text  = "\(currentScore)"
-//        won()
-//        if currentLevel > highLevel{
-//            highLevel = currentLevel
-//            let Defaults = UserDefaults.standard
-//            Defaults.set(highLevel, forKey: "HighLevel")
-//        }
-//    }
     
 }

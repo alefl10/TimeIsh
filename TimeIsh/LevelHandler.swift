@@ -14,8 +14,17 @@ class LevelHandler {
     private final var scene: SKScene!
     private var timeSpheres = [SKSpriteNode]()
     private var currentQuadrant: String! = "start"
-    private final let SPEED_FACTOR = 5
     private let coreData = CoreDataHandler()
+    
+    private final let SPEED_FACTOR = CGFloat(1.75)
+    private final let EASY = 5
+    private final let MEDIUM = 10
+    private final let HARD = 15
+    private final let PRO = 20
+    private final let IMPOSSIBLE = 30
+    private final let GOD = 50
+    
+    
     
     var _quadrant: String {
         return currentQuadrant
@@ -25,14 +34,16 @@ class LevelHandler {
         return timeSpheres
     }
     
-    func nextLevel(scene: SKScene, level: Int){
+    func nextLevel(scene: SKScene, level: Int) -> CGFloat{
         self.scene = scene
         checkHighestScore(level: level)
         switch level {
         case 1...5:
             multipleDots(level: level)
-//        case 5..<10:
-//            return CGFloat(level*SPEED_FACTOR)
+            return 0
+        case 5...10:
+            multipleDots(level: EASY)
+            return CGFloat(level) * SPEED_FACTOR
 //        case 10..<15:
 //        //Decrease TimeSphere size
 //        case 15..<20:
@@ -40,7 +51,7 @@ class LevelHandler {
         default:
             multipleDots(level: 5)
             print("New levels are yet to come")
-//            return CGFloat(0)
+            return 100
         }
     }
     
@@ -51,7 +62,6 @@ class LevelHandler {
             let timeSphereNode = TimeSphereNode(scene: scene!)
             currentQuadrant = timeSphereNode.setRandomPosition(quadrant: currentQuadrant)
             timeSpheres.append(timeSphereNode.timeSphere)
-            print("Time Spheres Count AFTER: \(timeSpheres.count)")
             scene.addChild(timeSpheres[index])
             if timeSpheres.count > 1 {
                 if timeSpheresOverlapping() {
