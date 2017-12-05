@@ -19,6 +19,9 @@
 		A9037EF81FBAC09D00D75F46 /* TimeIshUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9037EF71FBAC09D00D75F46 /* TimeIshUITests.swift */; };
 		A93730EC1FBACB0C0048F2C0 /* ClockScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93730EB1FBACB0C0048F2C0 /* ClockScene.swift */; };
 		A93730EE1FBACB720048F2C0 /* ClockScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A93730ED1FBACB720048F2C0 /* ClockScene.sks */; };
+		A9ABE7C71FD688AB0004ACE3 /* Boop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A9ABE7C41FD688AB0004ACE3 /* Boop.mp3 */; };
+		A9ABE7C81FD688AB0004ACE3 /* melody.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A9ABE7C51FD688AB0004ACE3 /* melody.mp3 */; };
+		A9ABE7C91FD688AB0004ACE3 /* Bok.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A9ABE7C61FD688AB0004ACE3 /* Bok.mp3 */; };
 		A9CF618A1FBBE69D003526CE /* ClockNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CF61891FBBE69D003526CE /* ClockNode.swift */; };
 		A9CF618C1FBBF6C9003526CE /* HandNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CF618B1FBBF6C9003526CE /* HandNode.swift */; };
 		A9CF618E1FBCF2F6003526CE /* TimeZoneNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CF618D1FBCF2F6003526CE /* TimeZoneNode.swift */; };
@@ -67,6 +70,9 @@
 		A9037EF91FBAC09D00D75F46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A93730EB1FBACB0C0048F2C0 /* ClockScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockScene.swift; sourceTree = "<group>"; };
 		A93730ED1FBACB720048F2C0 /* ClockScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ClockScene.sks; sourceTree = "<group>"; };
+		A9ABE7C41FD688AB0004ACE3 /* Boop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Boop.mp3; sourceTree = "<group>"; };
+		A9ABE7C51FD688AB0004ACE3 /* melody.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = melody.mp3; sourceTree = "<group>"; };
+		A9ABE7C61FD688AB0004ACE3 /* Bok.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Bok.mp3; sourceTree = "<group>"; };
 		A9CF61891FBBE69D003526CE /* ClockNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockNode.swift; sourceTree = "<group>"; };
 		A9CF618B1FBBF6C9003526CE /* HandNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandNode.swift; sourceTree = "<group>"; };
 		A9CF618D1FBCF2F6003526CE /* TimeZoneNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeZoneNode.swift; sourceTree = "<group>"; };
@@ -130,6 +136,7 @@
 				A9CF61881FBBE676003526CE /* GameNodes */,
 				A9CF618F1FBCF7D6003526CE /* Extensions */,
 				A9FCD9621FCE890C0042FF21 /* CoreData */,
+				A9ABE7C31FD688740004ACE3 /* Sounds */,
 				A9037ED11FBAC09C00D75F46 /* AppDelegate.swift */,
 				A9037ED91FBAC09C00D75F46 /* GameViewController.swift */,
 				A9037ED51FBAC09C00D75F46 /* Actions.sks */,
@@ -162,6 +169,16 @@
 				A9037EF91FBAC09D00D75F46 /* Info.plist */,
 			);
 			path = TimeIshUITests;
+			sourceTree = "<group>";
+		};
+		A9ABE7C31FD688740004ACE3 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				A9ABE7C61FD688AB0004ACE3 /* Bok.mp3 */,
+				A9ABE7C41FD688AB0004ACE3 /* Boop.mp3 */,
+				A9ABE7C51FD688AB0004ACE3 /* melody.mp3 */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 		A9CF61881FBBE676003526CE /* GameNodes */ = {
@@ -303,9 +320,12 @@
 			files = (
 				A9037EDD1FBAC09C00D75F46 /* Main.storyboard in Resources */,
 				A93730EE1FBACB720048F2C0 /* ClockScene.sks in Resources */,
+				A9ABE7C81FD688AB0004ACE3 /* melody.mp3 in Resources */,
+				A9ABE7C91FD688AB0004ACE3 /* Bok.mp3 in Resources */,
 				A9037ED41FBAC09C00D75F46 /* GameScene.sks in Resources */,
 				A9037EDF1FBAC09C00D75F46 /* Assets.xcassets in Resources */,
 				A9037EE21FBAC09C00D75F46 /* LaunchScreen.storyboard in Resources */,
+				A9ABE7C71FD688AB0004ACE3 /* Boop.mp3 in Resources */,
 				A9037ED61FBAC09C00D75F46 /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

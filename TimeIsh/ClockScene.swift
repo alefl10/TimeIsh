@@ -22,7 +22,14 @@ class ClockScene: SKScene {
     private var underHighScoreLabel : SKLabelNode!
     private var currentLevelLabel : SKLabelNode!
     private var underCurrentLevelLabel : SKLabelNode!
+    private final let backgroundMelody = SKAudioNode(fileNamed: "melody.mp3")
+    private final let hitSound = SKAction.playSoundFileNamed("Boop.mp3", waitForCompletion: true)
+    private final let missSound = SKAction.playSoundFileNamed("Bok.mp3", waitForCompletion: true)
     
+    private var audioBtn = UIButton(type: .custom)
+    private var audio = true
+    private final let audioON = UIImage(named: "audioON.jpg")
+    private final let audioOFF = UIImage(named: "audioOFF.jpg")
     private final let INITIAL_SPEED = CGFloat(125)
     private var gameStarted = false
     private var intersected = false
@@ -30,6 +37,7 @@ class ClockScene: SKScene {
     private var currentSpeed: CGFloat = 0.0
     private var highestScore = 1
     private var currentLevel = 1
+    
     
     private var Path = UIBezierPath()
     
@@ -40,6 +48,7 @@ class ClockScene: SKScene {
     override func didMove(to view: SKView) {
         currentSpeed = INITIAL_SPEED
         loadView()
+        setupBtn()
     }
     
     
@@ -62,8 +71,30 @@ class ClockScene: SKScene {
         currentSpeed += levelHandler.nextLevel(scene: scene!, level: currentLevel)
         
         addLabels()
+        if audio {
+            addChild(backgroundMelody)
+        }
+    }
+    
+    private func setupBtn() {
+        audioBtn.setImage(audioON, for: .normal)
+        audioBtn.bounds = CGRect(x:0, y:0, width:65, height:65)
+        audioBtn.center = CGPoint(x: (scene?.size.width)! - 60, y: 60)
+        audioBtn.addTarget(self, action: #selector(soundEffects(_:)), for: .touchUpInside)
+        view?.addSubview(audioBtn)
     }
    
+    @objc func soundEffects(_ sender: UIButton) {
+        if audio {
+            audioBtn.setImage(audioOFF, for: .normal)
+            backgroundMelody.removeFromParent()
+            audio = false
+        } else {
+            audioBtn.setImage(audioON, for: .normal)
+            addChild(backgroundMelody)
+            audio = true
+        }
+    }
     
     private func addLabels() {
         highestScore = coreData.getHighestScore()
@@ -113,12 +144,18 @@ class ClockScene: SKScene {
         } else {
             hand.run(rotateHand().reversed())
             if intersected {
+                if audio {
+                    run(hitSound)
+                }
                 levelHandler.deleteTimeSphere(mustTapTimeSphere: mustTapTimeSphere)
                 intersected = false
                 if levelHandler._timeSpheres.count == 0 {
                     won()
                 }
             } else {
+                if audio {
+                   run(missSound)
+                }
                 died()
             }
         }
@@ -189,6 +226,9 @@ class ClockScene: SKScene {
             else {
                 if intersected == true {
                     if hand.intersects(mustTapTimeSphere) == false{
+                        if audio {
+                            run(missSound)
+                        }
                         died()
                     }
                 }
