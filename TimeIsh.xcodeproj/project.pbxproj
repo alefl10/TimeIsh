@@ -280,6 +280,11 @@
 					A9037ECD1FBAC09C00D75F46 = {
 						CreatedOnToolsVersion = 9.1;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+						};
 					};
 					A9037EE71FBAC09D00D75F46 = {
 						CreatedOnToolsVersion = 9.1;

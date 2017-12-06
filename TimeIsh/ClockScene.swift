@@ -5,9 +5,9 @@
 //  Created by Alejandro Ferrero on 11/14/17.
 //  Copyright © 2017 Alejandro Ferrero. All rights reserved.
 //
-
 import UIKit
 import SpriteKit
+import AVFoundation
 
 class ClockScene: SKScene {
     
@@ -22,7 +22,7 @@ class ClockScene: SKScene {
     private var underHighScoreLabel : SKLabelNode!
     private var currentLevelLabel : SKLabelNode!
     private var underCurrentLevelLabel : SKLabelNode!
-    private final let backgroundMelody = SKAudioNode(fileNamed: "melody.mp3")
+    private final let backgroundMelody = "melody"
     private final let hitSound = SKAction.playSoundFileNamed("Boop.mp3", waitForCompletion: true)
     private final let missSound = SKAction.playSoundFileNamed("Bok.mp3", waitForCompletion: true)
     
@@ -40,6 +40,7 @@ class ClockScene: SKScene {
     
     
     private var Path = UIBezierPath()
+    private final var audioPlayer = AVAudioPlayer()
     
     private let coreData = CoreDataHandler()
     private let levelHandler = LevelHandler()
@@ -49,6 +50,7 @@ class ClockScene: SKScene {
         currentSpeed = INITIAL_SPEED
         loadView()
         setupBtn()
+        startMelody()
     }
     
     
@@ -67,12 +69,21 @@ class ClockScene: SKScene {
         self.addChild(clock)
         self.addChild(hand)
         self.addChild(dot)
-    
+        
         currentSpeed += levelHandler.nextLevel(scene: scene!, level: currentLevel)
         
         addLabels()
-        if audio {
-            addChild(backgroundMelody)
+    }
+    
+    private func startMelody() {
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: backgroundMelody, ofType: "mp3")!))
+            audioPlayer.volume = 2
+            audioPlayer.prepareToPlay()
+            audioPlayer.numberOfLoops = -1
+            audioPlayer.play()
+        } catch {
+            print(error)
         }
     }
     
@@ -83,15 +94,16 @@ class ClockScene: SKScene {
         audioBtn.addTarget(self, action: #selector(soundEffects(_:)), for: .touchUpInside)
         view?.addSubview(audioBtn)
     }
-   
+    
     @objc func soundEffects(_ sender: UIButton) {
         if audio {
             audioBtn.setImage(audioOFF, for: .normal)
-            backgroundMelody.removeFromParent()
+            audioPlayer.stop()
             audio = false
         } else {
             audioBtn.setImage(audioON, for: .normal)
-            addChild(backgroundMelody)
+            audioPlayer.currentTime = 0
+            audioPlayer.play()
             audio = true
         }
     }
@@ -154,7 +166,7 @@ class ClockScene: SKScene {
                 }
             } else {
                 if audio {
-                   run(missSound)
+                    run(missSound)
                 }
                 died()
             }
