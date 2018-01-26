@@ -27,11 +27,14 @@ class GameScene: SKScene {
     }
     
     private func clockScene() {
-        let sequence = SKAction.sequence([SKAction.wait(forDuration: 2.0), SKAction.run({
-            let fadeAway = SKTransition.fade(withDuration: 1.5)
-            let clockScene = ClockScene(fileNamed: "ClockScene")
-            self.view?.presentScene(clockScene!, transition: fadeAway)
-        })])
+        let sequence = SKAction.sequence([
+            SKAction.wait(forDuration: 2.0),
+            SKAction.run( {
+                    let fadeAway = SKTransition.fade(withDuration: 1.5)
+                    let clockScene = ClockScene(fileNamed: "ClockScene")
+                    self.view?.presentScene(clockScene!, transition: fadeAway)
+                })
+            ])
         self.run(sequence)
     }
 
