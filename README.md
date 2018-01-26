@@ -25,7 +25,7 @@ For the Game Application to work properly, it is assumed you have already instal
 - XCode 9.2 or superior
 - Swift 3
 
-Simply download this repository, open **PresentationDemo.xcodeproj** with XCode, and proceed to run the project on the XCode Simulator
+Simply download this repository, open **TimeIsh.xcodeproj** with XCode, and proceed to run the project on the XCode Simulator
 
 
 ## Additional Info
@@ -36,4 +36,4 @@ It is assumed you have a basic understanding of the following
 - Swift
 - SpriteKit
 
-**This Game Application is currently under development. This is not a finalized version of TimeIsh**
+**This Game Application is currently under development. This is not a finalized version of TimeIsh.**
